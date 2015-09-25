@@ -11,5 +11,3 @@ php mod/data/field/linkedcheckbox/cli/installhacks.php
 at the command line.
 
 One the plugin is installed if you go to MOODLESITEROOT/mod/data/field/linkedcheckbox/migrate/migrate.php you will be able to choose checkbox database fields that you wish to migrate over.
-
-Once the plugin is installed you can add the block to any course/activity page, use the block configuration to pick the database activity and fields to include in the tag cloud.
