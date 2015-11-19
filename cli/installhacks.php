@@ -26,14 +26,6 @@ define('CLI_SCRIPT', true);
 require(__DIR__.'/../../../../../config.php');
 require_once($CFG->libdir.'/clilib.php');
 
-$imgtarget = $CFG->dirroot . '/mod/data/pix/field/linkedcheckbox.gif';
-$imgsource = $CFG->dirroot . '/mod/data/field/linkedcheckbox/cli/resources/linkedcheckbox.gif';
-if (file_exists($imgtarget)) {
-    fwrite(STDERR, "Icon file already exists\n");
-} else {
-    copy($imgsource, $imgtarget);
-}
-
 $targettextfile = $CFG->dirroot . '/mod/data/lang/en/data.php';
 $targetcontents = file_get_contents($targettextfile);
 $sourcetextfile = $CFG->dirroot . '/mod/data/field/linkedcheckbox/cli/resources/lang_en_data.php';

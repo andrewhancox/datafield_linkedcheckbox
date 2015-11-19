@@ -64,5 +64,22 @@ class data_field_linkedcheckbox extends data_field_checkbox {
     public function name() {
         return get_string('name' . $this->type, 'datafield_' . $this->type);
     }
+
+    /**
+     * Prints the respective type icon
+     *
+     * @global object
+     * @return string
+     */
+    function image() {
+        global $OUTPUT;
+
+        $params = array('d' => $this->data->id, 'fid' => $this->field->id, 'mode' => 'display', 'sesskey' => sesskey());
+        $link = new moodle_url('/mod/data/field.php', $params);
+        $str = '<a href="' . $link->out() . '">';
+        $str .= '<img src="' . $OUTPUT->pix_url('linkedcheckbox', 'datafield_linkedcheckbox') . '" ';
+        $str .= 'height="' . $this->iconheight . '" width="' . $this->iconwidth . '" alt="' . $this->type . '" title="' . $this->type . '" /></a>';
+        return $str;
+    }
 }
 
