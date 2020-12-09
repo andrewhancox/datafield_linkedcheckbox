@@ -22,5 +22,5 @@
  */
 
 $string['pluginname'] = 'Linked Checkbox';
-$string['namelinkedcheckbox'] = 'Linked Checkbox field';
+$string['fieldtypelabel'] = 'Linked Checkbox field';
 $string['migrate'] = 'Migrate Checkbox fields to Linked Checkboxes';
