@@ -11,4 +11,11 @@
         <td class="c0" valign="top"><label for="param1"><?php echo get_string('fieldoptions', 'data'); ?></label></td>
         <td class="c1"><textarea class="optionstextarea" name="param1" id="param1" cols="80" rows="10"><?php if($this->field->param1) {p($this->field->param1);} ?></textarea></td>
     </tr>
+    <tr>
+        <td class="c0" valign="top"><label for="param2"><?php echo get_string('searchcontrol', 'datafield_linkedcheckbox'); ?></label></td>
+        <td class="c1"><select name="param2" id="param2">
+            <option value="-1"<?php if(empty ($this->field->param2) || $this->field->param2==-1) echo ' selected="selected"' ?>><?php echo get_string('checkbox', 'datafield_linkedcheckbox') ?></option>
+            <option value="-2"<?php if($this->field->param2==-2) echo ' selected="selected"' ?>><?php echo get_string('select', 'datafield_linkedcheckbox') ?></option>
+        </select></td>
+    </tr>
 </table>

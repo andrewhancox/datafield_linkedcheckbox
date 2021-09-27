@@ -27,8 +27,47 @@ class data_field_linkedcheckbox extends data_field_checkbox {
 
     public $type = 'linkedcheckbox';
 
+    function display_search_field($value = '') {
+        if (empty($this->field->param2) || $this->field->param2 == -1) {
+            return parent::display_search_field();
+        }
+
+        $options = array();
+        foreach (explode("\n", $this->field->param1) as $option) {
+            $option = trim($option);
+            $options[$option] = $option;  //Build following indicies from the sql.
+        }
+        $return = html_writer::label(get_string('fieldtypelabel', "datafield_" . $this->type),
+                'menuf_' . $this->field->id, false, array('class' => 'accesshide'));
+        $return .= html_writer::select($options, 'f_'.$this->field->id, empty($value) ? '' : reset($value),
+                array('' => 'choosedots'), array('class' => 'custom-select'));
+        return $return;
+    }
+
+    public function parse_search_field($defaults = null) {
+        if (empty($this->field->param2) || $this->field->param2 == -1) {
+            return parent::parse_search_field($defaults);
+        }
+
+        $paramselected = 'f_'.$this->field->id;
+        $paramallrequired = 'f_'.$this->field->id.'_allreq';
+
+        if (empty($defaults[$paramselected])) { // One empty means the other ones are empty too.
+            $defaults = array($paramselected => '', $paramallrequired => 0);
+        }
+
+        $selected    = optional_param($paramselected, $defaults[$paramselected], PARAM_NOTAGS);
+        $allrequired = optional_param($paramallrequired, $defaults[$paramallrequired], PARAM_BOOL);
+
+        if (empty($selected)) {
+            // no searching
+            return '';
+        }
+        return array('checked'=>[$selected], 'allrequired'=>$allrequired);
+    }
+
     public function display_browse_field($recordid, $template) {
-        global $DB, $CFG;
+        global $DB;
 
         if ($content = $DB->get_record('data_content', array('fieldid'=>$this->field->id, 'recordid'=>$recordid))) {
             if (empty($content->content)) {
