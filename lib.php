@@ -28,7 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 // We need to override the core_course_get_module web service function so that when the activity
 // is moved the correct renderer gets used to re-insert into the DOM.
 function datafield_linkedcheckbox_override_webservice_execution($externalfunctioninfo, $params) {
-    if (strpos($externalfunctioninfo->name, 'mod_data') === false) {
+    if (is_string($externalfunctioninfo->name) && strpos($externalfunctioninfo->name, 'mod_data') === false) {
         return false;
     }
 
